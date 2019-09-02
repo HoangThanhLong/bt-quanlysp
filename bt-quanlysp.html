@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Product = function (id, name, price, total) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.total = total;
+    };
+    let Cart = function() {
+        this.listProducts = [];
+        this.getProducts = function () {
+            return this.listProducts;
+        };
+        this.add = function (product) {
+            this.listProducts.push(product);
+        };
+        this.delete = function (product) {
+            let key = this.getKeyProductIntoCart(product);
+            if (key) {
+                this.listProducts.splice(key, 1);
+            }
+        };
+        this.getKeyProductIntoCart = function (product) {
+            for (let i = 0; i < this.listProducts.length ; i++) {
+                if (this.listProducts[i].id === product.id) {
+                    return i;
+                }
+            }
+            return null;
+        }
+    };
+    let apple = new Product(1,"apple", 20000, 3);
+    let samsung = new Product(2,"samsung", 20000, 3);
+    let xiaomi = new Product(3,"xiaomi", 20000, 3);
+    let cart = new Cart();
+    cart.add(apple);
+    cart.add(samsung);
+    cart.add(xiaomi);
+    cart.delete(samsung);
+    console.log(cart.getProducts());
+</script>
+</body>
+</html>
